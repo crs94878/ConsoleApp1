@@ -7,88 +7,79 @@ using System.Threading;
 
 namespace ConsoleApp1
 {
-        class RandomNumber
-        {
-            //Thread tr;
-            int X0;
-            int Xi;
-            int X1; 
-            int A = 0, C = 261011, A1=0,C1=0;
-        public static int ResultA { get; set; }
-            public static int ResultC { get; set; }
-
-            public RandomNumber(int z1, int z2,int z3)
-            {
-                //tr=new Thread()
-                X0 = z1;
-                Xi = z2;
-                X1 = z3;
-            
-            }
-
-            public bool ResultDeRandom()
-            {
-                int M = 1000000;
-            
-                for (A=0; A <= M; A++)
-                {
-                    for (C= 0; C <= M; C++)
-                    {
-                    if (Xi == (A * X0 + C) % M)
-                    
-                        if ((Xi == (A * X0 + C) % M) & (Result2(A,C)))
-                        {
-
-
-                        return true;
-
-                       
-                        }
-                    }
-                }
-            return false;
-
-        }
-        public bool Result2(int a, int c)
-        {
-            int M = 1000000;
-            if (X1 == (a * Xi + c) % M)
-            {
-                return true;
-            }          
-            return false;
-
-        }
-        public void PrintNims()
-            {
-                 Console.WriteLine("{0}:::{1}", A, C);
-                 Console.ReadLine();
-            }
-
-        }
-    
-
-    class Program
+    class RandomNumber
     {
-        static void Main(string[] args)
-        {
-            
-            int a, b,c;
-            a = Convert.ToInt32(Console.ReadLine());
-            b = Convert.ToInt32(Console.ReadLine());
-            c = Convert.ToInt32(Console.ReadLine());
 
-            RandomNumber rand = new RandomNumber(a, b,c);
-            if (rand.ResultDeRandom())
-            {
-                rand.PrintNims();
-            }
-            else
-            {
-                Console.WriteLine("Ne naideno");
-                Console.ReadLine();
-            }
-            //rand.ResultDeRandom()/*;*/
+        Int64 X0;
+        Int64 X1, X2;
+     
+
+        Int64 A = 0, C = 0;
+        public static Int64 ResultA { get; set; }
+        public static Int64 ResultC { get; set; }
+
+        public RandomNumber(Int64 z1, Int64 z2,Int64 z3)
+        {
+
+            X0 = z1;
+            X1 = z2;
+            X2 = z3;
         }
+
+        public void ResultDeRandom()
+        {
+            Int64 M = 1000000;
+            Int64 res=0;
+            Int64 res2=0;
+            bool IsTrue = false;
+            for (A = 0; A <= M; A++)
+            {
+                for (C = 0; C <= M; C++)
+                {
+                    res= (A * X0 + C) % M;      //получение второго числа   
+                   
+            if (res == X1)
+            {
+                        Console.WriteLine("При Х1=" + res+"||||||||"+res+"="+"("+A+"*"+ X0 +"+"+ C+")"+ "%"+ M);
+                        Console.WriteLine("Члены выражения--->  A:{0}|||||C:{1}", A, C);
+                        res2 = (A * res + C) % M;    // получение 3-его числа
+                        if (res2 == X2)
+                        {
+                            Console.WriteLine("При Х2=" + res2 + "||||||||" + res2 + "=" + "(" + A + "*" + res + "+" + C + ")" + "%" + M);
+                            Console.WriteLine("Члены выражения--->  A:{0}|||||C:{1}", A, C);
+                            IsTrue = true;
+                            break;
+                        }
+            }
+                    
+                }
+                if (IsTrue == true)
+                    break;
+            }
+            Console.WriteLine("________________________________________________________________________________");
+            Console.WriteLine("Найдены члены-----------> A:{0}|||||C:{1}", A, C);
+            Console.ReadLine();
+
+        }
+     
+
+
+
+
+        class Program
+        {
+            static void Main(string[] args)
+            {
+
+                Int64 a, b,c;
+                a = Convert.ToInt64(Console.ReadLine());
+                b = Convert.ToInt64(Console.ReadLine());
+                c = Convert.ToInt64(Console.ReadLine());
+                RandomNumber rand = new RandomNumber(a, b,c);
+                rand.ResultDeRandom();
+            
+                   }
+        }
+
     }
 }
